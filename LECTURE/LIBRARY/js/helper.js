@@ -1,6 +1,74 @@
 /*! helper.js © yamoo9.net, 2017 */
 
 /**
+ *  JavaScript 데이터 유형을 정확히 체크해주는 헬퍼 함수
+ *  @param  {everything}  data JavaScript 데이터 유형
+ *  @return {String}           체크된 데이터 유형을 문자열로 반환
+ */
+function checkType(data) {
+  return Object.prototype.toString.call(data).slice(8,-1).toLowerCase();
+}
+/**
+ *  JavaScript 숫자 데이터 유형인지 감지하는 헬퍼 함수
+ *  @param  {everything}  data JavaScript 데이터 유형
+ *  @return {Boolean}          체크된 데이터 유형이 숫자 유형인지 참/거짓 반환
+ */
+function isNumber(data) {
+  return checkType(data) === 'number';
+}
+/**
+ *  JavaScript 문자 데이터 유형인지 감지하는 헬퍼 함수
+ *  @param  {everything}  data JavaScript 데이터 유형
+ *  @return {Boolean}          체크된 데이터 유형이 문자 유형인지 참/거짓 반환
+ */
+function isString(data) {
+  return checkType(data) === 'string';
+}
+/**
+ *  JavaScript 불리언 데이터 유형인지 감지하는 헬퍼 함수
+ *  @param  {everything}  data JavaScript 데이터 유형
+ *  @return {Boolean}          체크된 데이터 유형이 불리언 유형인지 참/거짓 반환
+ */
+function isBoolean(data) {
+  return checkType(data) === 'boolean';
+}
+/**
+ *  JavaScript 함수 데이터 유형인지 감지하는 헬퍼 함수
+ *  @param  {everything}  data JavaScript 데이터 유형
+ *  @return {Boolean}          체크된 데이터 유형이 함수 유형인지 참/거짓 반환
+ */
+function isFunction(data) {
+  return checkType(data) === 'function';
+}
+/**
+ *  JavaScript 배열 데이터 유형인지 감지하는 헬퍼 함수
+ *  @param  {everything}  data JavaScript 데이터 유형
+ *  @return {Boolean}          체크된 데이터 유형이 배열 유형인지 참/거짓 반환
+ */
+function isArray(data) {
+  return checkType(data) === 'array';
+}
+/**
+ *  JavaScript 객체 데이터 유형인지 감지하는 헬퍼 함수
+ *  @param  {everything}  data JavaScript 데이터 유형
+ *  @return {Boolean}          체크된 데이터 유형이 객체 유형인지 참/거짓 반환
+ */
+function isObject(data) {
+  return checkType(data) === 'object';
+}
+/**
+ *  요소노드 데이터 유형인지 감지하는 헬퍼 함수
+ *  @param  {Node}    node  노드 유형
+ *  @return {Boolean}       체크된 데이터 유형이 요소노드 유형인지 참/거짓 반환
+ */
+function isElementNode(node) {
+  return node && node.nodeType === 1;
+}
+
+
+// ----------------------------------------------------
+
+/**
  *  요소 노드를 생성하는 헬퍼 함수
  *  @param   {String}  el_name   생성하고자 하는 노드 이름
  *  @return  {HTMLElement}       생성된 요소 노드 반환
@@ -20,23 +88,49 @@ function createText(content) {
  *  요소노드를 생성(콘텐츠[HTML 유형 가능] 포함)하거나, 특정 부모노드에 자식노드로 삽입하는 헬퍼 함수
  *  @param   {String}        el_name  생성할 노드 이름
  *  @param   {String}        html_str 생성된 노드 내부에 삽입될 HTML 코드
- *  @param   {HTMLElement}   context  생성된 노드의 부모 요소노드
- *  @param   {String}        method   삽입될 위치 [append, prepend]
+ *  @param   {HTMLElement}   target   생성된 노드의 부모 요소노드
+ *  @param   {String}        method   삽입될 위치 [append, prepend, before, after]
  *  @return  {HTMLElement}   생성된 요소노드 반환
  */
-function makeEl(el_name, html_str, context, method) {
+function makeEl(el_name, html_str, target, method) {
   // 초기 값 설정
-  method  = method || 'append';
+  // method  = method || 'append';
   // 전달인자로 요소 노드와 HTML Code 생성
   var el = createElement(el_name);
-  el.innerHTML = html_str;
-  // 만약 context 가 존재한다면?
-  if ( context ) {
-    if ( method === 'append' ) {
-      context.insertAdjacentElement('beforeend', el);
-    } else {
-      context.insertAdjacentElement('afterbegin', el);
+
+  // 3항식
+  // 변수 = 조건 ? 참인 경우 값 : 거짓인 경우 값;
+  el.innerHTML = (!html_str || !isString(html_str)) ? '' : html_str;
+  // if ( !html_str || !isString(html_str) ) {
+  //   el.innerHTML = '';
+  // } else {
+  //   el.innerHTML = html_str;
+  // }
+  // 만약 target 가 존재한다면?
+  if ( target && isElementNode(target) && target.parentNode ) {
+    // switch ~ case 구문 사용
+    switch( method ) {
+      default:
+      case 'append':
+        target.insertAdjacentElement('beforeend', el);
+      break;
+      case 'prepend':
+        target.insertAdjacentElement('afterbegin', el);
+      break;
+      case 'before':
+        target.insertAdjacentElement('beforebegin', el);
+      break;
+      case 'after':
+        target.insertAdjacentElement('afterend', el);
+      break;
     }
+
+    // ------------------------------------------------
+    // if ( method === 'append' ) {
+    //   target.insertAdjacentElement('beforeend', el);
+    // } else {
+    //   target.insertAdjacentElement('afterbegin', el);
+    // }
   }
   // 생성된 요소노드 반환
   return el;
@@ -249,11 +343,65 @@ function removeClass(el_node, class_name) {
   }
 }
 
+/**
+ *  부모노드를 찾아 반환하는 헬퍼 함수 (옵션: 몇 번째 부모 설정)
+ *  @param  {Node}    node        - 노드
+ *  @param  {Number}  above_depth - 몇 단계 위인지 설정
+ *  @return {Node}                - 부모 노드 반환
+ */
+function parent(node, above_depth) {
+  // 초기 값 설정: 사용자가 전달하지 않아도 기본 값을 1로 설정
+  above_depth = above_depth || 1;
+  while ( above_depth-- ) {
+    // node의 부모노드를 찾는다.
+    node = node.parentNode;
+  }
+  return node;
+}
 
+// 첫번째 자식 요소노드를 반환하는 헬퍼 함수
+function first(node) {
+  // 전달인자 유효성 검사
+  if ( !isElementNode(node) ) {
+    throw new Error('사용된 함수는 요소노드를 전달해야 합니다.');
+  }
+  // 인자가 요구하는 조건을 통과하면
+  return node.children[0];
+}
 
+// 마지막 자식 요소노드를 반환하는 헬퍼 함수
+function last(node) {
+  if ( !isElementNode(node) ) {
+    throw new Error('사용된 함수는 요소노드를 전달해야 합니다.');
+  }
+  var childs = node.children;
+  return childs[ childs.length - 1 ];
+}
 
+// 다음 형제 요소노드를 반환하는 헬퍼 함수
+function next(el_node) {
+  // 검증
+  if ( !isElementNode(el_node) ) {
+    throw new Error('사용된 함수는 요소노드를 전달해야 합니다.');
+  }
+  // el_node의 다음에 인접한 형제 노드는 요소노드인가? [반복]
+  do {
+    el_node = el_node.nextSibling;
+  } while( el_node && !isElementNode(el_node) );
+  // 반복하다가 요소노드가 나오면 반복을 중지하고, 요소노드를 반환
+  return el_node;
+}
 
-
-
-
-
+// 이전 형제 요소노드를 반환하는 헬퍼 함수
+function prev(el_node) {
+  // 검증
+  if ( !isElementNode(el_node) ) {
+    throw new Error('사용된 함수는 요소노드를 전달해야 합니다.');
+  }
+  // el_node의 다음에 인접한 형제 노드는 요소노드인가? [반복]
+  do {
+    el_node = el_node.previousSibling;
+  } while( el_node && !isElementNode(el_node) );
+  // 반복하다가 요소노드가 나오면 반복을 중지하고, 요소노드를 반환
+  return el_node;
+}
