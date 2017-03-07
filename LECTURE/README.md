@@ -35,6 +35,7 @@ README.md 수업 자료를 정리한 후, 이 곳에 진행된 내용을 작성�
 > - __[0228](README/0228.md)__ │ JavaScript Core (형변환, 함수형, 배열형, 객체형, 정보분석(Type check))
 > - __[0302](README/0302.md)__ | 웹서비스, 프로그래밍 패러다임(객체지향 / 함수형) , 디자인 패턴
 > - __[0303](README/0303.md)__ | JavaScript Core (반복문, detectCSSFeature 헬퍼 함수)
+> - __[0306](README/0306.md)__ | JavaScript Core (Scope, closure, hoisting, 전달인자 매개변수)
 
 -
 
@@ -42,9 +43,9 @@ README.md 수업 자료를 정리한 후, 이 곳에 진행된 내용을 작성�
 
 | 일자                | 진행 내용                           | 비고   |
 | ------------------ | --------------------------------- | ---- |
-| 3.[3,6]            | JavaScript Core                   |      |
-| 3.[7,8,10]         | <s>jQuery Library</s> Scope, Hoisting, Closure, Design Pattern, OOJS                  |      |
-| 3.[13,14,15]       | <s>Babel</s> / <s>Webpack</s> / ECMAScript 2015 |      |
+| 3.[<s>3</s>,<s>6</s>] | <s>JavaScript Core - Fundamental</s> | |
+| 3.[7,8,10] | <s>Scope</s>, <s>Hoisting</s>, <s>Closure</s>, Design Pattern, OOJS, jQuery Library | |
+| 3.[13,14,15]       | Babel / Webpack / ECMAScript 2015 | |
 | 3.[17,20,21,22,24] | Vue JS Framework + SPA            |      |
 | 4.[3,4,5,7]        | Team Coaching                     |      |
 | 4.[10,11,12,14]    | Team Coaching                     |      |
@@ -78,7 +79,7 @@ README.md 수업 자료를 정리한 후, 이 곳에 진행된 내용을 작성�
   - [Strict Mode](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Strict_mode)
   - [메모리 관리(가비지 콜렉터)](https://developer.mozilla.org/ko/docs/Web/JavaScript/Memory_Management)
   - [jQuery Library](http://api.jquery.com/)
-  - [Webpack](https://webpack.github.io/)
+  - [Webpack](https://webpack.js.org/)
   - [Gulp](http://gulpjs.com/)
   - [Babel](http://babeljs.io/)
 - 수업 시간에는 수강생이 이해하기 어려운 부분을 쉽게 이해할 수 있도록 짚어준다.
