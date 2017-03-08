@@ -58,41 +58,42 @@
   // 재생 중인 오디오 객체를 정지(stop)하는 함수
   function stopMusic(audio) {
     validate(!isAudioObject(audio), '오디오 객체가 전달되지 않았습니다.');
-    // 오디오 객체 일시정지
-    // audio.pause();
-    // 현재 재생 시간 콘솔에 기록
-    // console.log('현재 재생 시간:', audio.currentTime);
-    // audio.currentTime = 0;
     audio.stop();
   }
-
   // 오디오 객체 재생 가능한 시점(oncanplay)이 되면 재생(.play())
   audio.oncanplay = function() {
-    // 현재 시간 / 완료 시간
-    // .currentTime
-    // console.log('audio.currentTime:', audio.currentTime);
-    // .duration
-    // console.log('audio.duration:', audio.duration);
   };
+  
   // 오디오 객체 재생 중인 상태를 감지하는 이벤트
-  // ontimeupdate
-  // console.log('audio.ontimeupdate:', audio.ontimeupdate);
+  function statePercent(audio_type) {
+    validate(!isAudioObject(audio_type), '오디오 객체를 전달해야합니다.');
+    if ( !statePercent.total ) {
+      statePercent.total = audio_type.duration;
+    } return Math.floor( audio_type.currentTime / statePercent.total*100 ) + '%';
+  }
+
+  statePercent.total = null;
+
+  var statePercentage = (function(){
+  	var total = 0;
+  	return function(audio_type) {
+  		validate(!isAudioObject(audio_type), '오디오 객체를 전달해야합니다.');
+  		if ( !total ) {
+  			total = audio_type.duration;
+  		}
+	  return Math.floor( audio_type.currentTime / total*100 ) + '%';
+	  };
+  })();
+
+
   audio.ontimeupdate = function() {
-    // console.log('this.currentTime:', this.currentTime);
+    // var current = statePercent(this);
+    var current = statePercentage(this);
+    console.log('current', current);
 
-    var current = this.currentTime;
-    var total   = this.duration;
-    var percent = Math.floor(current/total*100);
-
-    console.log('percent:', percent + '%');
-
+    document.querySelector('.seekbar-progress').style.width = current;
   };
 
-  // 0.3초가 지나면, 재생 중인 오디오를 일시정지(.pause()) 하라.
-  // window.setTimeout(function() {
-  //   // audio.pause();
-  //   audio.stop(); // 미지원 API
-  // }, 1000);
 
 
   // 외부에서 접근 가능하도록 공개
@@ -101,6 +102,8 @@
   global.playMusic = playMusic;
 
 })(window);
+
+
 
 (function(global){
   'use strict';
