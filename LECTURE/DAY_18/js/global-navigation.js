@@ -1,6 +1,7 @@
 /*! global-navigation.js © yamoo9.net, 2017 */
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 // var init = function() {
 //   'use strict';
 //   // 글로벌 내비게이션 초기화
@@ -34,6 +35,8 @@
 var init = function() {
   'use strict';
 =======
+=======
+>>>>>>> db4fba2b21168d0d34dc212f8489d841673d32be
 /**
  *  초기화 함수
  */
@@ -52,12 +55,15 @@ var init = function() {
 var globalNavInit = function() {
   'use strict';
 <<<<<<< HEAD
+<<<<<<< HEAD
   var gnb = document.querySelector('.global-navigation');
   var gnb_links = gnb.querySelectorAll('a');
   for ( var i = 0, l = gnb_links.length-1; i<=l; i++ ) {
     gnb_links.item(i).onclick = clickGetIndexWrapper(i);
     }
 =======
+=======
+>>>>>>> db4fba2b21168d0d34dc212f8489d841673d32be
 
   // console.log('initialization Global Navigation');
 
@@ -82,18 +88,26 @@ var globalNavInit = function() {
  */
 var clickGetIndexWrapper = function(index) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   'use strict';
 
 >>>>>>> 665368240dfde3252f3852d69e4d87ae12941d9f
+=======
+  'use strict';
+
+>>>>>>> db4fba2b21168d0d34dc212f8489d841673d32be
   var clickGetIndex = function(e) {
     e.preventDefault();
     console.log('clicked:', index);
   };
 <<<<<<< HEAD
+<<<<<<< HEAD
   return clickGetIndex;
 };
 =======
+=======
+>>>>>>> db4fba2b21168d0d34dc212f8489d841673d32be
 
   retrun clickGetIndex;
 
