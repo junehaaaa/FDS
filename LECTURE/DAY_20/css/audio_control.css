@@ -14,6 +14,10 @@
 .seekbar-progress {
   position: absolute;
   height: inherit;
+<<<<<<< HEAD
   /* width: 10%; */
+=======
+  /*width: 10%;*/
+>>>>>>> 4189c560851cea81ba1bf23ea28f133583416fa6
   background: #34c0ff;
 }
