@@ -62,7 +62,7 @@
 // 이스케이프(Escape) 문자열 처리 해결
 // < e.g) audio_control_demo.js >
 
-// 보간법(Interpolation) 활용 가능 (Like Sass)
+// 보간법(Interpolation, ${}) 활용 가능 (Like Sass)
 // HTML 템플릿(Template) 작성에 탁월!
 // Vue JS 프레임워크에서 유용하게 활용하게 됨.
 
@@ -77,7 +77,19 @@
 // 이로 인해 의도치 않은 실수가 발생할 수 있는데 화살표 함수를 사용하면 this 참조가
 // 문맥으로 유지되기 때문에 실수를 미연에 방지할 수 있다.
 
+// (function(){
+//     'use strict';
+//     // this === undefined
+//     console.log(this);
+// })();
 
+// VS
+
+// (()=>{
+//     'use strict';
+//     // this === 상위 영역의 this 참조
+//     console.log(this);
+// })();
 
 
 ////////////////////////
@@ -111,7 +123,14 @@
 // 배열 ➤ 개별 값 변경 처리
 // []  ➤ ...numbers
 
+let a1, a2, a3;
 
+a1 = [3, 5, 8];
+a2 = [55, 88];
+// 기존 방식
+// a1.splice(2, 0, a2[0], a2[1]);
+// spread 방식으로 인자 전달하면 배열 데이터의 원소를 각각 풀어서 제공한다.
+a1.splice(2, 0, ...a2);
 
 
 /////////////////////////
@@ -123,8 +142,12 @@ function getPerson() {
   let name = 'Hoon';
   let job  = 'Instructor';
   return {
-    name: name,
-    job: job,
+    // name: name,
+    // job: job,
+    get name() {},
+    set name(new_name) {},
+    get job() {},
+    set job(new_job) {},
     greeting: function(you) {
       let message = 'Hello, ' + you + '.';
       message += ' My Name is ' + this.name + ' and My Job is ' + this.job;
@@ -132,6 +155,20 @@ function getPerson() {
     }
   };
 }
+
+// ES6
+
+// let getPerson = ()=> {
+//   let name='Hoon', job='Instructor';
+//   return {
+//     name, job,
+//     greeting(you){
+//       let message = `Hello, ${you}.`;
+//       message += `My Name is ${this.name} and My Job is ${this.job}.`;
+//       return message;
+//     }
+//   };
+// };
 
 // console.log( getPerson().name );
 // console.log( getPerson().greeting('Hey Min') );
@@ -145,6 +182,14 @@ let json_data = {
   jobChange() {}
 }
 
+let age = 10, name = "열", job = "열열";
+
+let json_data = {
+   name, age, job,
+   getName() {},
+   setAge() {},
+   jobChange() {}
+};
 
 
 ///////////////////////////
@@ -165,18 +210,70 @@ let json_data = {
 // extends     //
 // super       //
 
-function User(name, email) {
-  this.name = name;
-  this.email = email;
+// ES5
+// 생성자 함수
+// Constructor Function
+// function User(name, email) {
+//   this.name = name;
+//   this.email = email;
+// }
+// 스태틱 메서드
+// Static Methods
+// User.register = function(name, email) {
+//   return new User(name, email);
+// };
+// 프로토타입 메서드(인스턴스 메서드)
+// Instance Methods
+// User.prototype.changeEmail = function(new_mail) {
+//   this.email = new_mail;
+// };
+
+// ES6
+class User {
+  constructor(name, email, isAdmin) {
+    this.name    = name;
+    this.email   = email;
+    this.isAdmin = isAdmin;
+  }
+  static register(...params) {
+    return new User(...params);
+  }
+  changeEmail(new_mail) {
+    this.email = new_mail;
+  }
 }
 
-User.register = function(name, email) {
-  return new User(name, email);
-};
+// user 관리 배열 데이터 생성
+let user_list = [];
+// 배열에 멤버 추가
+user_list.push(User.register('a', 'a@acon.com', false));
+user_list.push(User.register('v', 'v@fds.net', true));
+user_list.push(User.register('j', 'j@jjcamp.com', false));
 
-User.prototype.changeEmail = function(new_mail) {
-  this.email = new_mail;
-};
+// ES5
+// user_list.find(function(user){
+//   return user.email === 'dondong@a.mail';
+// });
+
+// ⬇︎
+
+// ES6, Step 1
+// user_list.find((user)=>{
+//   return user.email === 'dondong@a.mail';
+// });
+// ES6, Step 2
+// user_list.find(user=>{
+//   return user.email === 'dondong@a.mail';
+// });
+// ES6, Step 3
+user_list.find(user=>user.isAdmin); // return value
+user_list.findIndex(user=>user.isAdmin); // return index
+
+// filter
+let user_not_admin = user_list.filter(user=>!user.isAdmin);
+
+
+
 
 // User
 // users = [ new User, new User, new User ]
@@ -185,11 +282,72 @@ User.prototype.changeEmail = function(new_mail) {
 
 // < e.g) 2: AudioCtrl 생성자 함수 ➤ 클래스 문법 활용 >
 
+// 상속(Inheritance)
+
+class Animal {
+  constructor(legs = 4, wings = 0) {
+    this.legs = legs;
+    this.wings = wings;
+  }
+  eat() {}
+  sleep() {}
+  run() {}
+}
+
+// class Duck extends Animal {
+//   constructor(type) {
+//     super(2, 2);
+//     this.type = type;
+//   }
+//   fly() {}
+// }
+// class Dog extends Animal {}
+// class Elephant extends Animal {}
+
+
 // < e.g) 3: Custom Element API >
 // 사용자설정 요소 v1: 재사용 가능한 웹 구성 요소 | https://goo.gl/DBLw9t
 // https://blog.risingstack.com/writing-a-javascript-framework-the-benefits-of-custom-elements/
 
+let _nickname = new WeakMap();
 
+// < e.g) 4: getter, setter >
+class Duck extends Animal {
+  constructor(type, nickname) {
+    super(2, 2);
+    // Public
+    this.type = type;
+    // WeakMap 사용하여 비공개 멤버 등록
+    _nickname.set(this, nickname);
+  }
+  // getter
+  get nickname() {
+    return _nickname.get(this) || undefined;
+  }
+  // setter
+  set nickname(new_name) {
+    if ( new_name === _nickname.get(this) ) {
+      console.info('이미 별명이 같습니다.');
+    } else if (new_name) {
+      _nickname.set(this, new_name);
+    }
+  }
+  fly() {}
+}
+
+let gold_duck = new Duck('황금 알을 낳는 오리');
+
+gold_duck.nickname; // undefined
+gold_duck.nickname = '황금 둥이';
+// gold_duck.nickname = '황금 둥이';
+
+// REST API Service
+// Ajax <-> json
+// HTTP Request Methods
+// GET, POST, PUT, DELETE
+// Front-End <-> json-server <json or js>
+// json-server : API
+// myjson.com, firebase
 
 
 ////////////////////////////
@@ -221,7 +379,7 @@ User.prototype.changeEmail = function(new_mail) {
 }(function(){}));
 
 // ES2015
-// include ~ from
+// import {show, call, moment} from 'module'
 // export
 // default
 
@@ -239,18 +397,20 @@ User.prototype.changeEmail = function(new_mail) {
 
 // < e.g) 1: 블록 스코프 내에서 디스트럭쳐링 활용 >
 let product = {
-  name           : 'TV',
+  productName    : 'TV',
   maker          : 'LG',
   features       : [ 'Time Recoding', 'Sharing Screen', 'Speech Recognition' ],
   productionYear : 2017
 };
 
-{
-  let name           = product.name;
-  let maker          = product.maker;
-  let features       = product.features;
-  let productionYear = product.productionYear;
-}
+let { productName, maker, features } = product;
+
+// {
+//   let name           = product.name;
+//   let maker          = product.maker;
+//   let features       = product.features;
+//   let productionYear = product.productionYear;
+// }
 
 // < e.g) 2: 함수 매개변수에 디스트럭쳐링 활용 >
 function greet(person) {
