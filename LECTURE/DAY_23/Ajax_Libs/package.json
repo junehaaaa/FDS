@@ -1,6 +1,11 @@
 {
   "scripts": {
+<<<<<<< HEAD
     "dev": "./node_modules/.bin/json-server DB/generateEmployees.js -w"
+=======
+    "json-server": "./node_modules/.bin/json-server",
+    "dev": "npm run json-server -- ./DB/generateEmployees.js -w"
+>>>>>>> f24105caa62396712ac0f413e42592f1a678216d
   },
   "devDependencies": {
     "faker": "^4.1.0",
