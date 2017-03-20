@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue JS 디렉티브 &amp; 템플릿</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+       <p v-pre>Vue JS는 인기 급상승 중!!{{ comment }}</p>
+       <hr>
+       <p v-text="comment">Vue JS는 인기 급상승 중!!</p>
+       <hr>
+       <div v-html="html_string"></div> <!-- html_string을 마크업으로 추가함 -->
+       <hr>
+       <div v-text="html_string"></div> <!-- html_string을 text로 추가함 -->
+    </div>
+
+    <script>
+       var vm = new Vue({
+           el: '#app',
+           data: {
+               comment: 'Vue JS는 인기 급상승 중!!',
+               html_string: `
+               <ul>
+                    <li><a href="#">Angular</li>
+                    <li><a href="#">React</li>
+                    <li><a href="#">Vue</li>
+               </ul>
+               `
+           }
+       });
+    </script>
+</body>
+</html>

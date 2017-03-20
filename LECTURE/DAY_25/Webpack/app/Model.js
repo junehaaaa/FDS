@@ -1,8 +1,8 @@
 
 // 모듈 정의
 
-export default function heysay() {
-    return 'heysay';
+// export default function heysay() {
+//     return 'heysay';
 
 /*! Model.js © yamoo9.net, 2017 */
 

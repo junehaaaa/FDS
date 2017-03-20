@@ -1,7 +1,7 @@
 
-import heysay from './Model';
+// import heysay from './Model';
 
-console.log('heysay:', typeof heysay);
+// console.log('heysay:', typeof heysay);
 
 // 모듈 로드
 import heysay from './Model';

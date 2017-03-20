@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue JS 디렉티브 &amp; 템플릿</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="is_show">This is Vue Directive <code>v-if</code></p>
+        <p v-show="is_show">This is Vue Directive <code>v-show</code></p>
+    </div>
+
+    <script>
+       var app = new Vue({
+           el: '#app',
+           data: {
+               is_show: false
+           }
+       })
+    </script>
+</body>
+</html>

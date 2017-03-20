@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue JS v2 학습</title>
+    <!--style-->
+    <style>
+        body {
+        margin: 3rem;
+        font-family: "Spoqa Han Sans";
+        font-weight: 200;
+        }
+        hr {
+        border: none;
+        border-bottom: 1px solid #ddd;
+        }
+        .demo {
+        width: 80vw;
+        }
+        .demo__input {
+        width: 93%;
+        border: 6px solid currentColor;
+        padding: 0.5em 0.76em;
+        color: #fe958f;
+        }
+        .demo__print-data {
+        border: 3px solid #fe958f;
+        border-radius: 5px;
+        padding: 1em;
+        background: #fee4e3;
+        color: #aa4b45;
+        }
+        .demo__print-area {
+        color: #fe958f;
+        font-weight: 700;
+        }
+        [v-cloak] { display: none; }
+    </style>
+</head>
+<body>
+    
+    <!--template-->
+    <div class="demo">
+        <input type="text" class="demo__input" v-model="message">
+        <p class="demo__print">사용자가 입력한 값은 <span class="demo__print-area">{{ message }}</span>입니다.</p>
+        <hr>
+        <pre class="demo__print-data"><span v-cloak>{{ this.$data }}</span></pre>
+    </div>
+
+    <!--JS Library & Framework-->
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/jquery"></script>
+    
+    <!--script-->
+    <script data-type="data">
+        var data = {
+            message: 'Hello Vue World'
+        };
+    </script>
+    
+    <script data-type="dom-script">
+        var demo, demo_input, demo_print, demo_print_area, demo_print_data;
+        // 초기화: DOM 준비 완료 시 처리
+        function init() {
+            // 문서 대상 객체 참조
+            demo            = document.querySelector('.demo');
+            demo_input      = document.querySelector('.demo__input');
+            demo_print      = document.querySelector('.demo__print');
+            demo_print_area = document.querySelector('.demo__print-area');
+            demo_print_data = document.querySelector('.demo__print-data');
+            // View 업데이트
+            updateView(data.message, true);
+            // 사용자 입력하는 이벤트 감지하여 처리하는 이벤트 바인딩
+            bindEvents();
+        }
+
+        function bindEvents() {
+            // 2000
+            // W3C : addEventListener, removeEventListener (IE 9+)
+            // MS  : attachEvent(), detachEvent()
+            demo_input.addEventListener('keyup', updateInputField);
+        }
+
+        function updateView(value, init) {
+            // demo_input의 value 값으로 data.message를 설정
+            if(init) { demo_input.value = value; }
+            // demo_print_area의 textContent 값으로 data.message를 설정
+            demo_print_area.textContent = value;
+            window.setTimeout(function() {
+            printData(data);
+            }, 100);
+        }
+
+        function updateData(value) {
+            data.message = value;
+        }
+
+        function printData(data) {
+            demo_print_data.innerHTML = prettify(JSON.stringify(data));
+        }
+
+        function updateInputField(e) {
+            var user_input = e.target.value;
+            updateView(user_input);
+            updateData(user_input);
+        }
+
+        function prettify(str) { // {key: value}
+            return str.replace(/{/g,'{\n&nbsp;&nbsp;').replace(/}/g,'\n}');
+        }
+        // 준비되면 실행
+        init();
+    </script>
+    <script data-type="jquery">
+        // (function($){
+        // 'use strict';
+
+        //     function init() {
+        //         $('.demo input').val( data.message );
+        //         $('.demo span').text( data.message );
+        //         $('.demo pre').html( prettify(window.JSON.stringify(data)) );
+
+        //         $('.demo input').on('keyup', function(e){
+        //             var user_input = $(this).val();
+        //             $('.demo span').text( user_input );
+        //             data.message = user_input;
+        //             $('.demo pre').html( prettify(window.JSON.stringify(data)) );
+        //         });
+        //     }
+        // })(window.jQuery);
+    </script>
+    <script data-type="vue">
+        (function(Vue){
+            'use strict';
+
+            new Vue({
+                'el': '.demo',
+                'data': data
+            })
+        })(window.Vue);
+    </script>
+</body>
+</html>

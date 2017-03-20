@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue JS 디렉티브 &amp; 템플릿</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    <div id="app">
+        <p v-once>안녕 {{ name }}.
+            난 {{ people[1].favorites[people[1].currentIndex + 2] }}
+        </p>
+    </div>
+
+    <script>
+        var people = [
+            { name: '준하',
+                favorites: ['nol-ki', 'muk-ki', 'ja-ki'] },
+            { name: '미정',
+                favorites: ['쇼핑', 'muk-ki', 'ja-ki'] }
+
+            ]
+        var app = new Vue({
+            el: '#app',
+            data: {
+                people: people
+            }
+        });
+    </script>
+</body>
+</html>

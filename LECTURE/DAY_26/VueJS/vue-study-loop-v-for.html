@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue JS 디렉티브 &amp; 템플릿</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        [v-cloak] { display: none; }
+        .reset-list { margin: 0; list-style: none; padding-left: 0; }
+        .zebra { background: #eee; }
+    </style>
+</head>
+<body>
+    <div id="app" v-cloak>
+        <h1>{{app_name}}</h1>
+        <ul class="reset-list vue-features">
+        <template v-for="feature in vue_features" >
+            <li class="vue-features__item">
+                {{ feature.context }}
+            </li>
+            <li class="vue-features__item zebra">
+                {{ feature.desc }}
+            </li>
+        </template>
+        </ul>
+        <hr>
+        <ul class="reset-list vue-features">
+            <li v-for="(feature, index) in vue_features" class="vue-features__item">{{ index + 1 }} {{feature}}</li>
+        </ul>
+    </div>
+
+<script>
+    var vue_features = [];
+    vue_features.push({ context: 'High Speed', desc: '고속 렌더링' });
+    vue_features.push({ context: 'Reactivity', desc: '반응형 시스템' });
+    vue_features.push({ context: 'Rendering', desc: '선언적 렌더링' });
+    vue_features.push({ context: 'Easy', desc: '비교적 쉬운 학습 난이도' });
+    vue_features.push({ context: 'SPA', desc: '단일 페이지 애플리케이션 구현 기능에 필요한 모든 기능 제공' });
+
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            app_name: 'Vue JS Application Features',
+            vue_features: vue_features
+        }
+    });
+</script>
+</body>
+</html>
