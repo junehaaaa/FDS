@@ -63,32 +63,14 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = heysay;
-// 모듈 정의
-
-function heysay() {
-    return 'heysay';
-};
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Model__ = __webpack_require__(0);
-
-
-console.log('heysay:', typeof __WEBPACK_IMPORTED_MODULE_0__Model__["a" /* default */]);
+throw new Error("Module build failed: Error: Couldn't find preset \"env\" relative to directory \"/Users/JUNE/fds/LECTURE/DAY_25/Webpackk\"\n    at /Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/file/options/option-manager.js:293:19\n    at Array.map (native)\n    at OptionManager.resolvePresets (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/file/options/option-manager.js:275:20)\n    at OptionManager.mergePresets (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/file/options/option-manager.js:264:10)\n    at OptionManager.mergeOptions (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/file/options/option-manager.js:249:14)\n    at OptionManager.init (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/file/options/option-manager.js:368:12)\n    at File.initOptions (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/file/index.js:212:65)\n    at new File (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/file/index.js:135:24)\n    at Pipeline.transform (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-core/lib/transformation/pipeline.js:46:16)\n    at transpile (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-loader/lib/index.js:46:20)\n    at Object.module.exports (/Users/JUNE/fds/LECTURE/DAY_25/Webpackk/node_modules/babel-loader/lib/index.js:163:20)");
 
 /***/ })
 /******/ ]);
