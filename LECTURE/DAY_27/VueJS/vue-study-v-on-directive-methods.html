@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="UTF-8">
+  <title>Vue JS</title>
+  <style>body {margin: 4rem;} [v-cloak] {display: none;}</style>
+  <!-- Vue JS 로드 -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <!-- root vue instnace -> mounted elementNode -->
+  <div id="app">
+    <a href="" v-on:click.prevent.once="increaseCount(3)">Add count {{ count }}</a>
+    <button type="button" v-on:click="resetCount">count = 0</button>
+    <button type="button" v-on:click="decreaseCount(6)">Remove count {{ count }}</button>
+    <p>current count is <span v-text="count"></span></p>
+  </div>
+
+<script>
+var app = new Vue({
+    el: '#app',
+    data: {
+        count: 0
+    },
+    methods: {
+        increaseCount: function(n) { this.count+=n; },
+        resetCount: function() { this.count=0; },
+        decreaseCount: function(n) { this.count-=n; }
+    }
+});
+
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="UTF-8">
+  <title>Vue JS</title>
+  <style>body {margin: 4rem;} [v-cloak] {display: none;}</style>
+  <!-- Vue JS 로드 -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <!-- root vue instnace -> mounted elementNode -->
+  <div id="app">
+    <p class="fullname">{{ combineFullNameComputed }}</p>
+    <label for="first">firstName:</label>
+    <input type="text" id="first" v-model="first">
+    <label for="last">lastName:</label>
+    <input type="text" id="last" v-model="last">
+    <!--<p>{{ message }}</p>
+    <p class="reverse-message">{{ reverseMessage }}</p>-->
+  </div>
+
+<script>
+    var app = new Vue({
+        'el': '#app',
+        'data': {
+            'first': 'adsf',
+            'last': 'ff',
+            'message': '오늘 날씨는.. 먼지가 너무 많앙.'
+        },
+        'computed': {
+            'reverseMessage': function() {
+                return this.message.split('').reverse().join('')
+            },
+            'combineFullNameComputed': function() {
+                return this.first + ' ' + this.last;
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="UTF-8">
+  <title>Vue JS</title>
+  <style>body {margin: 4rem;} [v-cloak] {display: none;}</style>
+  <!-- Vue JS 로드 -->
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <!-- root vue instnace -> mounted elementNode -->
+  <div id="app">
+    <div class="form-area">
+      <label for="add-todo__item">Add Todo:</label>
+      <input type="text" id="add-todo__item" v-model="new_item" @keyup.enter="addTodoItem">
+      <button type="button" @click="addTodoItem">Add</button>
+    </div>
+    <hr>
+    <!--list-view-->
+    <ul class="todo-list" v-cloak>
+      <li v-for="task of todos">
+        <label>
+          <input type="checkbox" v-model="task.done">
+          {{ task.desc }}
+        </label>
+      </li>
+    </ul>
+  </div>
+
+<script>
+  
+  (function(global, Vue){
+    'use strict';
+
+    Vue.config.keyCodes = {
+      g: 71
+    };
+
+    var data = {
+        new_item: '',
+        todos: [{
+          done: false,
+          desc: 'Learn Vue Js Instnace'
+        }]
+    };
+
+    var options = {
+        el: '#app',
+        data: data,
+        methods: {
+          addTodoItem: function() {
+            this.todos.push({done: false, desc: this.new_item});
+            this.new_item = '';
+          }
+        }
+    };
+
+    global.vm = new Vue(options);
+    
+  
+  })(window, window.Vue);
+
+  // (function(global){
+  //   'use strict';
+  //   // global.vm <=== Vue Instance
+  //   // vm.$data.todos.push({done:false, desc:사용자 입력 값});
+  //   var form_area   = global.document.querySelector('.form-area');
+  //   var form_input  = form_area.querySelector('input');
+  //   var form_button = form_area.querySelector('button');
+  //   function addTodoItem(e) {
+  //     var input;
+  //     if ( (e.type === 'keyup' && e.keyCode === 13) || e.type === 'click' ) {
+  //       input = this.value.trim();
+  //     } // 함수 종료
+  //       else { return; }
+  //     if (!input) { console.error('todo를 입력해주세요.'); return; }
+  //     vm.$data.todos.push({done:false, desc:input});
+  //   }
+  //   form_input.addEventListener('keyup', addTodoItem);
+  //   form_button.addEventListener('click', addTodoItem.bind(form_input));
+  // })(window);
+</script>
+</body>
+</html>
