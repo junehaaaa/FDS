@@ -3,13 +3,22 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta charset="UTF-8">
+<<<<<<< HEAD
   <title>Vue JS</title>
   <style>body {margin: 4rem;} [v-cloak] {display: none;}</style>
   <!-- Vue JS 로드 -->
+=======
+  <title>Vue JS: </title>
+  <style>
+    body {margin: 4rem;}
+    [v-cloak]{display: none}
+  </style>
+>>>>>>> b2d147152612fbd77b47a9bc6fb4d6226444f20f
   <script src="https://unpkg.com/vue"></script>
 </head>
 <body>
 
+<<<<<<< HEAD
   <!-- root vue instnace -> mounted elementNode -->
   <div id="app">
     <div class="form-area">
@@ -19,6 +28,18 @@
     </div>
     <hr>
     <!--list-view-->
+=======
+  <div id="app">
+    <!-- input field -->
+    <div class="form-area">
+      <label for="add-todo__item">Register Todo Item:</label>
+      <input v-model="new_item" @keyup.enter="addTodoItem" id="add-todo__item" type="text">
+      <button type="button" @click="addTodoItem">Add</button>
+    </div>
+    <hr>
+    <!-- list view -->
+    <h3>Todo List</h3>
+>>>>>>> b2d147152612fbd77b47a9bc6fb4d6226444f20f
     <ul class="todo-list" v-cloak>
       <li v-for="task of todos">
         <label>
@@ -30,6 +51,7 @@
   </div>
 
 <script>
+<<<<<<< HEAD
   
   (function(global, Vue){
     'use strict';
@@ -81,6 +103,80 @@
   //   form_input.addEventListener('keyup', addTodoItem);
   //   form_button.addEventListener('click', addTodoItem.bind(form_input));
   // })(window);
+=======
+(function(global, Vue){
+  'use strict';
+
+  ///////////////
+  // Vue 환경 설정
+  ///////////////
+  Vue.config.keyCodes = {
+    g: 71,
+    command: 91
+  };
+
+  ////////////////
+  // Vue 데이터 객체
+  ////////////////
+  var data = {
+    new_item: '',
+    todos: [
+      {
+        done: false,
+        desc: 'Learn Vue JS Instance'
+      }, {
+        done: false,
+        desc: 'Learn jQuery Plugin Develop'
+      }
+    ]
+  };
+
+  ///////////////
+  // Vue 옵션 객체
+  ///////////////
+  var options = {
+    // mount될 요소 선택자 설전
+    el: '#app',
+    data: data,
+    // 인스턴스 메서드
+    methods: {
+      addTodoItem: function() {
+        // this === vm.$data === data;
+        this.todos.push( {done: false, desc: this.new_item} );
+        this.new_item = '';
+      }
+    }
+  };
+
+  // Vue 인스턴스 생성 및 전역에 공개
+  global.vm = new Vue(options);
+})(window, window.Vue);
+
+;(function(global){
+  'use strict';
+
+  // global.vm <=== Vue Instance
+  // vm.$data.todos.push({done:false, desc:사용자 입력 값});
+
+  var form_area   = global.document.querySelector('.form-area');
+  var form_input  = form_area.querySelector('input');
+  var form_button = form_area.querySelector('button');
+
+  function addTodoItem(e) {
+    var input;
+    if ( (e.type === 'keyup' && e.keyCode === 13) || e.type === 'click' ) {
+      input = this.value.trim();
+    } // 함수 종료
+      else { return; }
+    if (!input) { console.error('todo를 입력해주세요.'); return; }
+    vm.$data.todos.push({done:false, desc:input});
+  }
+
+  form_input.addEventListener('keyup', addTodoItem);
+  form_button.addEventListener('click', addTodoItem.bind(form_input));
+
+}) // (window);
+>>>>>>> b2d147152612fbd77b47a9bc6fb4d6226444f20f
 </script>
 </body>
 </html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="UTF-8">
+  <title>Vue JS</title>
+  <style>
+    body {margin: 4rem;}
+    [v-cloak]{display: none;}
+		.is-completed { position: relative; color: aquamarine; }
+		.is-completed::before { 
+			content: '';
+			position: absolute;
+			top: 0.4em;
+			left: 0;
+			right: 0;
+			border-top: 2px solid aquamarine;
+			}
+  </style>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <div id="app">
+		<section class="todolist">
+			<h1>Todo List</h1>
+			<ul>
+				<li 
+					v-for="todo of todos"
+					v-show="!todo.completed"
+					>
+					<label>
+						<input type="checkbox" v-model="todo.completed"> {{ todo.task }}
+					</label>
+				</li>
+			</ul>
+		</section>
+		<section class="completed-todolist">
+			<h1>Completed Todo List</h1>
+			<li
+				v-for="todo of completedTodos"
+				:class="{ 'is-completed': todo.completed }">
+				<label>
+						<input type="checkbox" v-model="todo.completed"> {{ todo.task }}
+				</label>
+			</li>
+		</section>
+  </div>
+
+<script>
+var todosData = [
+	{
+  	completed: false,
+  	task: 'Vue JS의 컴포넌트 학습'
+	},
+	{
+  	completed: false,
+  	task: 'Vue JS의 컴포넌트 사이 통신'
+	},
+	{
+  	completed: false,
+  	task: 'Vue JS - 인스턴스 $refs, $data, $option, ...공부'
+	}
+];
+var todos = new Vue({
+  el: '#app',
+  data: {
+		todos: todosData
+	},
+	computed: 
+		{ completedTodos: function() {
+			return this.todos.filter( function(todo) {
+				return todo.completed;
+			});
+		}
+	}
+});
+</script>
+</body>
+</html>
