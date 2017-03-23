@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="UTF-8">
+  <title>Vue JS</title>
+  <style>
+    body {margin: 4rem;}
+    [v-cloak]{display: none;}
+  </style>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+
+  <div id="app">
+      <today-message>Good</today-message>
+      <today-message>Sad</today-message>
+      <today-message>Happy</today-message>
+      <today-message>Great</today-message>
+  </div>
+
+<script>
+    Vue.component('today-message', {
+        template: "<p>어쩌구저쩌구 ㅇㅇㅇㅇㅇㅇㅇ</p>"
+    });
+
+    var vm = new Vue({
+        el: "#app",
+    });
+</script>
+</body>
+</html>
