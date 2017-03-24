@@ -20,6 +20,12 @@
         <a 
           @click.prevent="gameStart"
           href class="game__start-message">{{ setting.message }}</a>
+
+      <div
+        v-if="!is_started"
+        class="scene__before-start">
+        <img ref="gameLogo" class="game__logo" :src="settings.logo.src" :alt="settings.logo.alt">
+        <a @click.prevent="gameStart" href class="game__start-message">{{ settings.message }}</a>
       </div>
 
        <!--GAME STARTED -->
@@ -51,6 +57,33 @@
          </div> 
        </div> 
 
+      <div v-else class="scene__started">
+        <template v-for="(player, index) of players">
+          <div class="game__character">
+            <div class="game__character-hp">
+              <div
+                :style="{width: player.HP+'%'}"
+                class="game__character-hp--state"> {{ player.HP }} </div>
+            </div>
+            <!-- CHARACTER IMAGE -->
+            <img
+              :src="playerSrc(player.name)"
+              :alt="player.name"
+              :style="player.style">
+          </div>
+          <img v-if="index === 0" class="game__vs" src="images/vs.png" alt="VS">
+        </template>
+        <div class="game__controller">
+          <!-- LOOP BUTTONS -->
+          <!-- BUTTON TEXT -->
+          <button
+            v-for="button in buttons"
+            :class="['game__controller-button', button.replace(' ', '-')]"
+            @click="detactAction(button)"
+            type="button">{{ button }}</button>
+        </div>
+      </div>
+
       <!-- FINISH GAME -->
       <!-- FINISH MESSAGE -->
       <div v-if="is_finished" class="scene__finished">
@@ -61,15 +94,11 @@
           <button type="button" @click="giveUp">No</button>
         </div>
       </div>
-
-
     </div>
   </div>
 
 <script src="https://unpkg.com/vue"></script>
 <script src="js/StreetFighter.js"></script>
-<script>
-</script>
 
 </body>
 </html>

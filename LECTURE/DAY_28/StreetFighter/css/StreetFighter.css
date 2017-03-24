@@ -1,3 +1,5 @@
+/*! StreetFighter.css © yamoo9.net, 2017 */
+
 [v-cloak] {display: none;}
 
 body {
@@ -209,4 +211,6 @@ a.game__start-message {
 .scene__finished-buttons button:focus {
   color: #fff;
   background: #000;
+
 }
+
