@@ -1,7 +1,7 @@
-/*! vue-demo.js © yamoo9.net, 2017 */
-<<<<<<< HEAD
+
 (function(global, Vue){
     'use strict';
+/*! vue-demo.js © yamoo9.net, 2017 */
 
     // 전역 컴포넌트 등록
 		var Brand = {
@@ -73,7 +73,7 @@
 
     global.app = app;
 })(window, window.Vue);
-=======
+
 ;(function(global, Vue){
   'use strict';
 
@@ -135,4 +135,4 @@
   global.app = app;
 
 })(window, window.Vue);
->>>>>>> b1f20162b0aed533649249b06419243ea3ff8c38
+
