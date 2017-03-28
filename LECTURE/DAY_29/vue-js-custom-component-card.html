@@ -3,64 +3,6 @@
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
   <meta charset="UTF-8">
-<<<<<<< HEAD
-  <title>Vue JS</title>
-  <link rel="stylesheet" href="css/bulma.min.css">
-  <link rel="stylesheet" href="css/vue-demo.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-
-	<div id="app">
-		<app-card>
-			<template></template>
-		</app-card>
-		<hr>
-		<app-card></app-card>
-		<hr>
-		<app-card></app-card>
-
-
-	</div>
-
-<script src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
-<script>
-
-	var Card = {
-		template: `
-			<div class="card">
-				<header class="card-header">
-					<h1 class="card-header-title">
-						Comh1onent
-					</h1>
-					<a clah1s="card-header-icon">
-						<span class="icon">
-							<i class="fa fa-angle-down" aria-label="card folding"></i>
-						</span>
-					</a>
-				</header>
-				<div class="card-content">
-					<div class="content">
-						<slot></slot>
-					</div>
-				</div>
-				<footer class="card-footer">
-				<slot name="card-footer-item-list"></slot>
-					<a class="card-footer-item">Save</a>
-					<a class="card-footer-item">Edit</a>
-					<a class="card-footer-item">Delete</a>
-				</footer>
-			</div>
-	`	
-	};
-
-	var vm = new Vue({
-		el: '#app',
-		components: {
-			'app-card': Card
-		}
-	})
-=======
   <title>Vue JS - 사용자 등록 카드 컴포넌트</title>
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/bulma.min.css">
@@ -143,14 +85,13 @@
       </div>
     `
   };
-
   var vm = new Vue({
     el: '#app',
     components: {
       'app-card': Card
     }
   });
->>>>>>> b1f20162b0aed533649249b06419243ea3ff8c38
 </script>
 </body>
 </html>
+Contact GitHub API Training Shop Blog About
