@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko-KR">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta charset="UTF-8">
+  <title>Vue JS</title>
+  <link rel="stylesheet" href="css/bulma.min.css">
+  <link rel="stylesheet" href="css/vue-demo.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+	<div id="app">
+        <app-modal></app-modal>
+    </div>
+        
+
+<script src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
+<script>
+
+
+
+  var vm = new Vue({
+    el: '#app',
+    components: {
+      'app-modal': {
+        template: `
+          <div v-if="is_visible" class="modal is-active">
+            <div class="modal-background"></div>
+            <div class="modal-content">
+              <div class="box">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dicta excepturi quasi alias, aperiam ad mollitia quis beatae assumenda recusandae cumque.
+              </div>
+            </div>
+            <button class="modal-close" @click="closeModal"></button>
+          </div>
+        `,
+        data: function() {
+          return {
+            is_visible: true
+          }
+        },
+        methods: {
+          closeModal: function() {
+            console.log('clicked');
+            this.is_visible = false;
+          }
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

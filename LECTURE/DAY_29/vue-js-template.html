@@ -10,10 +10,36 @@
 <body>
 
   <div id="app">
-
+    <h2 slot="header"></h2>
+    <app-message></app-message>
   </div>
 
 <script src="https://unpkg.com/vue@2.2.4/dist/vue.js"></script>
-<script src="js/vue-demo.js"></script>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    components: {
+      'app-message': {
+        template: `
+          <div class="app-message">
+            <header class="app-message__header">
+              <slot name="header">
+                <h3 class="app-message__headline>우리 모두 다같이!</h3>
+              </slot>
+            </header>
+            <div class="app-message__body">
+              <slot><p>반가워요!</p></slot>
+            </div>
+            <footer class="app-message__footer">
+              <slot name="footer">
+                <a href="http://fastcampus.co.kr">FDS</a>
+              </slot>
+            </footer>
+          </div>
+        `
+      }
+    }
+  })
+</script>
 </body>
 </html>
